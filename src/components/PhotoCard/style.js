@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 import { fadeIn } from '../styles/animation'
 
 export const Article = styled.article`
@@ -31,4 +31,8 @@ export const Button = styled.button`
   & svg {
     margin-right: 4px;
   }
+  ${props => props.isHover && css`
+    color:red;
+    cursor:pointer;
+  `}
 `
