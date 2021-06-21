@@ -1,10 +1,9 @@
 import React from 'react'
 import { PhotoCard } from '../PhotoCard'
 
-import { graphql } from 'react-apollo'
-import { gql } from 'apollo-boost'
+import { useQuery, gql } from '@apollo/client'
 
-const withPhotos = graphql(gql`
+const withPhotos = gql`
   query getPhotos{
     photos{
       id
@@ -15,16 +14,19 @@ const withPhotos = graphql(gql`
       liked
     }
   }
-`)
+`
 
-const ListOfPhotoCardsComponent = ({ data: { photos = [] } } = {}) => {
+export const ListOfPhotoCards = () => {
+  const { loading, error, data } = useQuery(withPhotos)
+
+  if (error) return (<h2>Internal Server Error</h2>)
+  if (loading) return (<h2>Loading....</h2>)
+
   return (
     <ul style={{ margin: '0 10px' }}>
-      {photos.map((photo) => (
+      {data.photos.map((photo) => (
         <PhotoCard key={photo.id} {...photo} />
       ))}
     </ul>
   )
 }
-
-export const ListOfPhotoCards = withPhotos(ListOfPhotoCardsComponent)
