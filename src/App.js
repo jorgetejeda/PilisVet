@@ -1,10 +1,11 @@
 import React from 'react'
 
 import { GlobalStyle } from './components/styles/GlobalStyle'
-import { PhotoCardWithQuery } from './components/PhotoCardWithQuery'
 import { Logo } from './components/Logo'
+import { Navbar } from './components/Navbar'
 
 import { Home } from './page/Home'
+import { Detail } from './page/Detail'
 
 import { Router } from '@reach/router'
 
@@ -16,17 +17,13 @@ const App = () => {
   return (
     <div style={{ margin: '0 10px' }}>
       <GlobalStyle />
-      <a href='/'>
-        <Logo />
-      </a>
-      {
-        detailId
-          ? <PhotoCardWithQuery id={detailId} />
-          : <Router>
-            <Home path='/' />
-            <Home path='/pet/:id' />
-          </Router>
-      }
+      <Logo />
+      <Router>
+        <Home path='/' />
+        <Home path='/pet/:id' />
+        <Detail path='/detail/:detailId' detailId={detailId} />
+      </Router>
+      <Navbar />
     </div>
   )
 }
