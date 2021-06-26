@@ -1,10 +1,13 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { Router } from '@reach/router'
 import { Favs } from '../page/Favs'
 import { NotRegisteredUser } from '../page/NotRegisteredUser'
 import { User } from '../page/User'
+import { AppContext } from '../Context'
 
-export const PrivateRouter = ({ isAuth }) => {
+export const PrivateRouter = () => {
+  const { isAuth, activateAuth } = useContext(AppContext)
+
   return (
     <Router>
       {
@@ -14,8 +17,8 @@ export const PrivateRouter = ({ isAuth }) => {
             <User path='/user' />
             </>
           : <>
-            <NotRegisteredUser path='/favs' />
-            <NotRegisteredUser path='/user' />
+            <NotRegisteredUser path='/favs' isAuth={isAuth} activateAuth={activateAuth} />
+            <NotRegisteredUser path='/user' isAuth={isAuth} activateAuth={activateAuth} />
           </>
       }
     </Router>

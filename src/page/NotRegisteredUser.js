@@ -1,36 +1,46 @@
-import React, { useContext } from 'react'
-import { AppContext } from '../Context'
+import React from 'react'
 import { UserForm } from '../components/UserForm'
 import { useRegisterMutation } from '../hooks/useRegisterMutation'
+import { useLoginMutation } from '../hooks/useLoginMutation'
 
-export const NotRegisteredUser = () => {
-  const { isAuth, activateAuth } = useContext(AppContext)
-  const { mutation, mutationLoading, mutationError } = useRegisterMutation()
+export const NotRegisteredUser = ({ isAuth, activateAuth }) => {
+  const { registerMutation, registerLoading, registerError } = useRegisterMutation()
+  const { loginMutation, loginLoading, loginError } = useLoginMutation()
 
   // FIXME: la variable de isAuth se actualiza 3 vecces
   // Pasando de un valor a otro
-  const onSubmit = ({ email, password }) => {
+  const onSubmitRegister = ({ email, password }) => {
     const input = { email, password }
-    mutation({ variables: { input } }).then(activateAuth)
+    registerMutation({ variables: { input } }).then(({ data }) => {
+      activateAuth(data.signup)
+    })
   }
 
-  const errorMsg =
-    mutationError && 'El usuario ya existe o hay algún problema.'
+  const onSubmitLogin = ({ email, password }) => {
+    const input = { email, password }
+    loginMutation({ variables: { input } }).then(({ data }) => {
+      activateAuth(data.login)
+    })
+  }
+
+  const errorRegisterMsg = registerError && 'El usuario ya existe o hay algún problema.'
+
+  const errorLoginMsg = loginError && 'Usuario o contraseña no coinciden o el usuario no existe.'
 
   return (
     <>
       {isAuth
         ? <UserForm
-            disabled={mutationLoading}
+            disabled={registerLoading}
             title='Registrarse'
-            error={errorMsg}
-            onSubmit={onSubmit}
+            error={errorRegisterMsg}
+            onSubmit={onSubmitRegister}
           />
         : <UserForm
-            disabled={mutationLoading}
+            disabled={loginLoading}
             title='Iniciar Sesión'
-            error={errorMsg}
-            onSubmit={onSubmit}
+            error={errorLoginMsg}
+            onSubmit={onSubmitLogin}
           />}
     </>
   )

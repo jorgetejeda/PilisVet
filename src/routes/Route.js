@@ -4,7 +4,6 @@ import { Home } from '../page/Home'
 import { Detail } from '../page/Detail'
 import { PrivateRouter } from './PrivateRouter'
 // import Context from '../Context'
-const isAuth = false
 
 export const Route = ({ detailId }) => {
   return (
@@ -13,7 +12,7 @@ export const Route = ({ detailId }) => {
         <Home path='/' />
         <Detail path='/detail/:detailId' detailId={detailId} />
       </Router>
-      <PrivateRouter isAuth={isAuth} />
+      <PrivateRouter />
     </>
   )
 }
