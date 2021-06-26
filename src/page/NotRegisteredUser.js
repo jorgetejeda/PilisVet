@@ -7,8 +7,6 @@ export const NotRegisteredUser = ({ isAuth, activateAuth }) => {
   const { registerMutation, registerLoading, registerError } = useRegisterMutation()
   const { loginMutation, loginLoading, loginError } = useLoginMutation()
 
-  // FIXME: la variable de isAuth se actualiza 3 vecces
-  // Pasando de un valor a otro
   const onSubmitRegister = ({ email, password }) => {
     const input = { email, password }
     registerMutation({ variables: { input } }).then(({ data }) => {
