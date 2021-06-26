@@ -29,7 +29,19 @@ export const NotRegisteredUser = ({ isAuth, activateAuth }) => {
 
   return (
     <>
-      {isAuth
+      <UserForm
+        disabled={registerLoading}
+        title='Registrarse'
+        error={errorRegisterMsg}
+        onSubmit={onSubmitRegister}
+      />
+      <UserForm
+        disabled={loginLoading}
+        title='Iniciar Sesión'
+        error={errorLoginMsg}
+        onSubmit={onSubmitLogin}
+      />
+      {/* {isAuth
         ? <UserForm
             disabled={registerLoading}
             title='Registrarse'
@@ -41,7 +53,7 @@ export const NotRegisteredUser = ({ isAuth, activateAuth }) => {
             title='Iniciar Sesión'
             error={errorLoginMsg}
             onSubmit={onSubmitLogin}
-          />}
+          />} */}
     </>
   )
 }
