@@ -8,14 +8,15 @@
     "dev": "webpack serve --mode development",
     "serve:dev": "webpack --mode 'development' && npx serve dist -s",
     "lint": "standard",
-    "lint-fix": "standard --fix"
+    "lint-fix": "standard --fix",
+    "test": "cypress open"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/midudev/curso-platzi-react-avanzado.git"
   },
   "keywords": [],
-  "author": "",
+  "author": "Jorge Tejeda Bello",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/midudev/curso-platzi-react-avanzado/issues"
@@ -26,6 +27,7 @@
     "@babel/preset-env": "^7.14.5",
     "@babel/preset-react": "^7.14.5",
     "babel-loader": "^8.2.2",
+    "cypress": "^7.6.0",
     "html-webpack-plugin": "^5.3.1",
     "standard": "^16.0.3",
     "webpack": "^5.39.1",
